@@ -3,9 +3,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CafeModule } from './cafe/cafe.module';
 import { TiendaModule } from './tienda/tienda.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CafeTiendaModule } from './cafe-tienda/cafe-tienda.module';
 @Module({
-  imports: [CafeModule, TiendaModule],
+  imports: [CafeModule, TiendaModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'museum',
+      entities: [CafeModule, TiendaModule],
+      dropSchema: true,
+      synchronize: true,
+      keepConnectionAlive: true
+    }),
+    CafeTiendaModule,],
   controllers: [AppController],
   providers: [AppService],
 })
