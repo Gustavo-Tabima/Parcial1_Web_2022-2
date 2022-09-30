@@ -6,7 +6,7 @@ import { TiendaEntity } from 'src/tienda/tienda.entity';
 @Entity()
 export class CafeEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: bigint;
+    id: number;
     @Column()
     nombre: string;
     @Column()
